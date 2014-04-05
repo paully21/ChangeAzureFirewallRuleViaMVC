@@ -1,0 +1,32 @@
+﻿@model Microsoft.WindowsAzure.Management.Sql.Models.FirewallRule
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div style="font-weight:bold; font-size:16px;">The current IP address setting is @Model.StartIPAddress.ToString()</div>
+
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h2>Set firewall IP address rule</h2>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            <label for="IPAddress" class="control-label col-md-2">Your IP Address</label>
+            <div class="col-md-10">
+                <input type="text" value="@Request.UserHostAddress" name="IPAddress" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
